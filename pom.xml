@@ -75,7 +75,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.springopenapi.SpringOpenapiApplication</mainClass>
+<!--					<mainClass>com.springopenapi.SpringOpenapiApplication</mainClass>-->
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -100,8 +100,12 @@
 							<generatorName>spring</generatorName>
 							<apiPackage>com.springopenapi.api</apiPackage>
 							<modelPackage>com.springopenapi.model</modelPackage>
+							<supportingFilesToGenerate>
+								ApiUtil.java
+							</supportingFilesToGenerate>
 							<configOptions>
 								<delegatePattern>true</delegatePattern>
+								<serializableModel>true</serializableModel>
 							</configOptions>
 						</configuration>
 					</execution>
