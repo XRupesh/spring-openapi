@@ -1,0 +1,158 @@
+swagger: '2.0'
+info:
+  description: Provide all the end points related to HRM tool
+  version: '1.0'
+  title: HRM Tool
+host: localhost:8080
+basePath: /
+tags:
+  - name: signup-controller
+    description: Login Controller
+
+paths:
+  /api/signup:
+    post:
+      tags:
+        - signup-controller
+      summary: UserSignup
+      operationId: UserSignupUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: signupRequest
+          description: signupRequest
+          required: true
+          schema:
+            $ref: '#/definitions/SignupRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SignupResponse'
+        404:
+          description: record not found
+          schema:
+            $ref: '#/definitions/404NotFound'
+        401:
+          description: Unathorized user
+          schema:
+            $ref: '#/definitions/401Unathorised'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/500ServerError'
+        400:
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/400BadRequest'
+
+definitions:
+
+  SignupRequest:
+    type: object
+
+    properties:
+      firstName:
+        type: string
+        example: "Peter"
+      lastName:
+        type: string
+        example: "Singh"
+      emailAddress:
+        type: string
+        example: "peter@gmail.com"
+      jobTitle:
+        type: string
+        example: "Java Developer"
+      companyName:
+        type: string
+        example: "Xgileit"
+      phoneNumber:
+        type: string
+        example: "0790922399"
+      industryType:
+        type: string
+      employeeCount:
+        type: integer
+        example: 101
+      country:
+        type: string
+        example: "India"
+      companyDomain:
+        type: array
+        items:
+          type: string
+          example: .@xgleit.com
+  SignupResponse:
+    type: object
+    properties:
+      firstName:
+        type: string
+        example: "Peter"
+      lastName:
+        type: string
+        example: "Singh"
+      emailAddress:
+        type: string
+        example: "peter@gmail.com"
+      jobTitle:
+        type: string
+        example: "Java Developer"
+      companyName:
+        type: string
+        example: "Xgileit"
+      phoneNumber:
+        type: string
+        example: "0790922399"
+      employeeCount:
+        type: integer
+        format: int32
+        example: 101
+      country:
+        type: string
+        example: "India"
+      companyDomain:
+        type: array
+        items:
+          type: string
+          example: .@xgleit.com
+      message:
+        type: string
+        example: "User Successfully Registered"
+  404NotFound:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      erroeMessage:
+        type: string
+        example: records not available in db
+
+  401Unathorised:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      erroeMessage:
+        type: string
+        example: Un-Authorized acess
+
+  500ServerError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      erroeMessage:
+        type: string
+        example:  Database error occured
+  400BadRequest:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      erroeMessage:
+        type: string
+        example:  Database error occured
